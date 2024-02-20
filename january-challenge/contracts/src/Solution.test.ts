@@ -105,63 +105,63 @@ describe('Solution', () => {
     return merkleMap;
   }
 
-  // it('admin adds an address', async () => {
-  //   await localDeploy();
-  //   let merkleMap = new MerkleMap();
-  //   merkleMap = await addAddress(merkleMap, admin, testAccounts[2].publicKey);
-  //   //address count should update
-  //   expect(zkApp.contract.addressesCount.get()).toEqual(Field(1));
-  //   //and the merkle root is updated
-  //   expect(zkApp.contract.addressesMerkleRoot.get())
-  //     // to our merkle map's root
-  //     .toEqual(merkleMap.getRoot());
-  // });
+  it('admin adds an address', async () => {
+    await localDeploy();
+    let merkleMap = new MerkleMap();
+    merkleMap = await addAddress(merkleMap, admin, testAccounts[2].publicKey);
+    //address count should update
+    expect(zkApp.contract.addressesCount.get()).toEqual(Field(1));
+    //and the merkle root is updated
+    expect(zkApp.contract.addressesMerkleRoot.get())
+      // to our merkle map's root
+      .toEqual(merkleMap.getRoot());
+  });
 
-  // it('admin adds an address and the address adds a message', async () => {
-  //   await localDeploy();
-  //   let merkleMap = new MerkleMap();
-  //   merkleMap = await addAddress(merkleMap, admin, testAccounts[2].publicKey);
-  //   const message = Field(parseInt('1001010', 2));
-  //   merkleMap = await addMessage(merkleMap, testAccounts[2], message);
+  it('admin adds an address and the address adds a message', async () => {
+    await localDeploy();
+    let merkleMap = new MerkleMap();
+    merkleMap = await addAddress(merkleMap, admin, testAccounts[2].publicKey);
+    const message = Field(parseInt('1001010', 2));
+    merkleMap = await addMessage(merkleMap, testAccounts[2], message);
 
-  //   //message count should update
-  //   expect(zkApp.contract.messageCount.get()).toEqual(Field(1));
-  //   //and the merkle root is updated
-  //   expect(zkApp.contract.addressesMerkleRoot.get())
-  //     // to our merkle map's root
-  //     .toEqual(merkleMap.getRoot());
-  // });
+    //message count should update
+    expect(zkApp.contract.messageCount.get()).toEqual(Field(1));
+    //and the merkle root is updated
+    expect(zkApp.contract.addressesMerkleRoot.get())
+      // to our merkle map's root
+      .toEqual(merkleMap.getRoot());
+  });
 
-  // it('admin adds an address and the address tries to add message 2 times', async () => {
-  //   await localDeploy();
-  //   let merkleMap = new MerkleMap();
-  //   merkleMap = await addAddress(merkleMap, admin, testAccounts[2].publicKey);
-  //   const message = Field(parseInt('1101001010', 2));
-  //   merkleMap = await addMessage(merkleMap, testAccounts[2], message);
+  it('admin adds an address and the address tries to add message 2 times', async () => {
+    await localDeploy();
+    let merkleMap = new MerkleMap();
+    merkleMap = await addAddress(merkleMap, admin, testAccounts[2].publicKey);
+    const message = Field(parseInt('1101001010', 2));
+    merkleMap = await addMessage(merkleMap, testAccounts[2], message);
 
-  //   await expect(async () => {
-  //     const message2 = Field(parseInt('1001001001', 2));
-  //     merkleMap = await addMessage(merkleMap, testAccounts[2], message2);
-  //   }).rejects.toThrowError('message is already present');
-  // });
+    await expect(async () => {
+      const message2 = Field(parseInt('1001001001', 2));
+      merkleMap = await addMessage(merkleMap, testAccounts[2], message2);
+    }).rejects.toThrowError('message is already present');
+  });
 
-  // it('a not eligible address tries to add a message', async () => {
-  //   await localDeploy();
-  //   let merkleMap = new MerkleMap();
-  //   await expect(async () => {
-  //     const message = Field(parseInt('1001010', 2));
-  //     merkleMap = await addMessage(merkleMap, testAccounts[2], message);
-  //   }).rejects.toThrowError('merkle root does not match');
-  // });
+  it('a not eligible address tries to add a message', async () => {
+    await localDeploy();
+    let merkleMap = new MerkleMap();
+    await expect(async () => {
+      const message = Field(parseInt('1001010', 2));
+      merkleMap = await addMessage(merkleMap, testAccounts[2], message);
+    }).rejects.toThrowError('merkle root does not match');
+  });
 
-  // it('a not eligible address tries to add a message', async () => {
-  //   await localDeploy();
-  //   let merkleMap = new MerkleMap();
-  //   await expect(async () => {
-  //     const message = Field(parseInt('1001010', 2));
-  //     merkleMap = await addMessage(merkleMap, testAccounts[2], message);
-  //   }).rejects.toThrowError('merkle root does not match');
-  // });
+  it('a not eligible address tries to add a message', async () => {
+    await localDeploy();
+    let merkleMap = new MerkleMap();
+    await expect(async () => {
+      const message = Field(parseInt('1001010', 2));
+      merkleMap = await addMessage(merkleMap, testAccounts[2], message);
+    }).rejects.toThrowError('merkle root does not match');
+  });
 
   it('admin adds an address and the address adds a incorrect message', async () => {
     await localDeploy();
